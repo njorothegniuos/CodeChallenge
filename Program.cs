@@ -11,6 +11,8 @@ namespace StubHub
         {
             Console.WriteLine("Hello World!");
 
+            int eventCount = 1;
+
             var events = new List<Event>{
                 new Event{ Name = "Phantom of the Opera", City = "New York"},
                 new Event{ Name = "Metallica", City = "Los Angeles"},
@@ -35,13 +37,21 @@ namespace StubHub
                 //Events in customers city
                 foreach (var item in allEventsWithinCustomerCity)
                 {
-                    AddToEmail(customer, item);
+                    eventCount = eventCount++;
+
+                    if (eventCount <= 5)
+                    {
+                        AddToEmail(customer, item);
+                    }
                 }
 
                 //Get events outside custmers city
-                foreach (var item in events)
+                if (eventCount <= 5)
                 {
-                    AddToEmail(customer, item);
+                    foreach (var item in events)
+                    {
+                        AddToEmail(customer, item);
+                    }
                 }
             }
             else
@@ -49,7 +59,10 @@ namespace StubHub
                 //Get events outside custmers city
                 foreach (var item in events)
                 {
-                    AddToEmail(customer, item);
+                    if (eventCount <= 5)
+                    {
+                        AddToEmail(customer, item);
+                    }
                 }
             }
 
@@ -99,7 +112,7 @@ namespace StubHub
 
         static int GetDistance(string fromCity, string toCity)
         {
-            return GetDistanceByCityLength(fromCity, toCity);
+            return AlphebiticalDistance(fromCity, toCity);
         }
 
         private static int AlphebiticalDistance(string s, string t)
@@ -116,18 +129,9 @@ namespace StubHub
                 // Console.Out.WriteLine($"loop 2 i={i} {s.Length} {t.Length}");
                 result += s.Length > t.Length ? s[i] : t[i];
             }
+
             return result;
         }
-        private static int GetDistanceByCityLength(string s, string t)
-        {
-            if (s == t)
-            {
-                return 0;
-            }
-
-            return t.Length - s.Length;
-        }
-
     }
 
 
