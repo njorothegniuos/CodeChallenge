@@ -9,8 +9,6 @@ namespace StubHub
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             int eventCount = 1;
 
             var events = new List<Event>{
@@ -77,7 +75,7 @@ namespace StubHub
         {
             int customerCity = GetTotalPricePerCity(c.City);
             int eventCity = GetTotalPricePerCity(c.City);
-            price = eventCity;
+            price = GetPrice(e);
             // int concertPrice = customerCity - eventCity;
 
             var distance = GetDistance(c.City, e.City);
